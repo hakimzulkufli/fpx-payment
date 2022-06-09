@@ -6,8 +6,10 @@ use JagdishJP\FpxPayment\Fpx;
 
 $transactionStatusEnabled = Config::get('fpx.routes.transaction_status_enabled');
 
-Route::get('fpx/transaction/status/{reference_id?}', function ($reference_id = '') {
+if ($transactionStatusEnabled) {
+	Route::get('fpx/transaction/status/{reference_id?}', function ($reference_id = '') {
 
-	$response = Fpx::getTransactionStatus($reference_id);
-	return $response;
-})->name('fpx.transaction.status');
+		$response = Fpx::getTransactionStatus($reference_id);
+		return $response;
+	})->name('fpx.transaction.status');
+}
