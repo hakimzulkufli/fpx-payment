@@ -5,6 +5,11 @@
 	 */
 return [
 	/**
+	 * Test Mode
+	 */
+	'test_mode' => env('FPX_TEST_MODE', false),
+
+	/**
 	 * The Merchant Exchange ID
 	 *
 	 * You need to contact FPX to request your id.
