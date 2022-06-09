@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Config;
 use JagdishJP\FpxPayment\Fpx;
+
+$transactionStatusEnabled = Config::get('fpx.routes.transaction_status_enabled');
 
 Route::get('fpx/transaction/status/{reference_id?}', function ($reference_id = '') {
 

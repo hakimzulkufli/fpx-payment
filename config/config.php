@@ -93,6 +93,16 @@ return [
 	'should_verify_response' => env('FPX_VERIFY_RESPONSE', true),
 
 	/**
+	 * Enable/Disable optional routes provided by the package
+	 */
+	'routes' => [
+		'generate_csr_enabled' => env('FPX_ROUTE_GENERATE_CSR_ENABLED', true),
+		'payment_auth_request_enabled' => env('FPX_ROUTE_AUTH_REQUEST_ENABLED', true),
+		'initiate_payment_enabled' => env('FPX_ROUTE_INITIATE_PAYMENT_ENABLED', true),
+		'transaction_status_enabled' => env('FPX_ROUTE_TRANSACTION_STATUS_ENABLED', true),
+	],
+
+	/**
 	 * Certificate Paths
 	 *
 	 */
