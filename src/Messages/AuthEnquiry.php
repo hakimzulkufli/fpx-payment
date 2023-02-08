@@ -123,7 +123,7 @@ class AuthEnquiry extends Message implements Contract
 			'fpx_buyerIban' => $this->buyerIBAN ?? '',
 			'fpx_buyerId' => $this->buyerId ?? '',
 			'fpx_buyerName' => $this->buyerName ?? '',
-			'fpx_makerName' => $this->makerName ?? '',
+			'fpx_makerName' => $this->buyerMakerName ?? '',
 			'fpx_msgToken' => $this->flow ?? '',
 			'fpx_msgType' => $this->type ?? '',
 			'fpx_productDesc' => $this->productDescription ?? '',
@@ -167,7 +167,7 @@ class AuthEnquiry extends Message implements Contract
 		$this->debitResponseNumber = $response_value['fpx_debitAuthNo'];
 		$this->foreignId = $response_value['fpx_fpxTxnId'];
 		$this->foreignTimestamp = $response_value['fpx_fpxTxnTime'];
-		$this->makerName = $response_value['fpx_makerName'];
+		$this->buyerMakerName = $response_value['fpx_makerName'];
 		$this->flow = $response_value['fpx_msgToken'];
 		$this->type = $response_value['fpx_msgType'];
 		$this->exchangeId = $response_value['fpx_sellerExId'];
@@ -267,7 +267,7 @@ class AuthEnquiry extends Message implements Contract
 			'fpx_debitAuthNo' => $this->debitResponseNumber ?? '',
 			'fpx_fpxTxnId' => $this->foreignId ?? '',
 			'fpx_fpxTxnTime' => $this->foreignTimestamp ?? '',
-			'fpx_makerName' => $this->makerName ?? '',
+			'fpx_makerName' => $this->buyerMakerName ?? '',
 			'fpx_msgToken' => $this->flow ?? '',
 			'fpx_msgType' => $this->type ?? '',
 			'fpx_sellerExId' => $this->exchangeId ?? '',
