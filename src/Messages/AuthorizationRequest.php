@@ -29,7 +29,7 @@ class AuthorizationRequest extends Message implements Contract
 	{
 		parent::__construct();
 
-		$this->url = (Config::get('fpx.test_mode') !== false) ?
+		$this->url = (Config::get('fpx.test_mode') === false) ?
 			Config::get('fpx.urls.production.auth_request') :
 			Config::get('fpx.urls.uat.auth_request');
 	}

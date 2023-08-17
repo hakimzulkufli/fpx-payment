@@ -41,7 +41,7 @@ class AuthEnquiry extends Message implements Contract
 		parent::__construct();
 
 		$this->type = self::CODE;
-		$this->url = (Config::get('fpx.test_mode') !== false) ?
+		$this->url = (Config::get('fpx.test_mode') === false) ?
 			Config::get('fpx.urls.production.auth_enquiry') :
 			Config::get('fpx.urls.uat.auth_enquiry');
 	}
@@ -179,7 +179,7 @@ class AuthEnquiry extends Message implements Contract
 		$this->currency = $response_value['fpx_txnCurrency'];
 		$this->checkSum = $response_value['fpx_checkSum'];
 
-		if ((Config::get('fpx.test_mode') !== false) || Config::get('fpx.should_verify_response'))
+		if ((Config::get('fpx.test_mode') === false) || Config::get('fpx.should_verify_response'))
 			$this->verifySign($this->checkSum, $this->responseFormat());
 
 		$transaction = $this->saveTransaction();

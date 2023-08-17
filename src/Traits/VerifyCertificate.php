@@ -90,7 +90,7 @@ trait VerifyCertificate {
 		$dir = Config::get('fpx.certificates.uat.dir');
 
 
-		if ((Config::get('fpx.test_mode') !== false)) {
+		if ((Config::get('fpx.test_mode') === false)) {
 			$disk = Config::get('fpx.certificates.production.disk');
 			$dir = Config::get('fpx.certificates.production.dir');
 		}

@@ -25,7 +25,7 @@ class BankEnquiry extends Message implements Contract {
 		parent::__construct();
 
 		$this->type = self::CODE;
-		$this->url = (Config::get('fpx.test_mode') !== false) ?
+		$this->url = (Config::get('fpx.test_mode') === false) ?
 			Config::get('fpx.urls.production.bank_enquiry') :
 			Config::get('fpx.urls.uat.bank_enquiry');
 	}
@@ -92,7 +92,7 @@ class BankEnquiry extends Message implements Contract {
 
 		$checksum = $response_value['fpx_checkSum'];
 
-		if ((Config::get('fpx.test_mode') !== false) || Config::get('fpx.should_verify_response'))
+		if ((Config::get('fpx.test_mode') === false) || Config::get('fpx.should_verify_response'))
 		$this->verifySign($checksum, $data);
 
 		$bankListToken = strtok($response_value['fpx_bankList'], ",");
@@ -259,7 +259,7 @@ class BankEnquiry extends Message implements Contract {
 	}
 
 	public function getTestingBanks() {
-		if ((Config::get('fpx.test_mode') !== false)) {
+		if ((Config::get('fpx.test_mode') === false)) {
 			return [];
 		}
 
