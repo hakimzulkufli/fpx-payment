@@ -23,15 +23,16 @@ This will generate the following files
 - The assets in public directory.
 - The view file with default html for you to override `payment.blade.php`. Note do not change form action URL `fpx.payment.auth.request`.
 
-## Setups
+## Setup
 
 1. Add your redirect urls and your Seller and Exchange Id to the `.env` file.
 
 ```php
-FPX_INDIRECT_URL=https://app.test/payments/fpx/callback
+
 FPX_INDIRECT_PATH=payments/fpx/callback
-FPX_DIRECT_URL=https://app.test/payments/fpx/direct-callback
-FPX_DIRECT_PATH=payments/fpx/direct-callback
+FPX_DIRECT_PATH=payments/fpx/webhook
+FPX_INDIRECT_URL="${APP_URL}/${FPX_INDIRECT_PATH}"
+FPX_DIRECT_URL="${APP_URL}/${FPX_DIRECT_PATH}"
 
 FPX_EXCHANGE_ID=
 FPX_SELLER_ID=
@@ -46,27 +47,32 @@ FPX_SELLER_ID=
    Run openssl code to generate CSR. Submit this CSR to FPX service provider to get the Exchange Certificates.
 
 3. After generating your certificates add them to your app. By default, we look for the certificates inside the following directives. 
-	 Create `fpx/uat` and `fpx/prod` directories in `storage/app/public` directory and paste your certificates there. You can find UAT certificate in `uat certificate/fpxuat_current.cur` rename it with your Exchange ID and place it in mentioned UAT directory.
+	 Create `fpx/uat` and `fpx/prod` directories in `storage/app` directory and paste your certificates there. You can find UAT certificate in `fpx certificates/uat/fpxuat_current.cer` rename it with your Exchange ID and place it in mentioned UAT directory.
 
 ```php
 'certificates' => [
 	'uat' => [
 		'disk' => 'local', // S3 or Local. Don't put your certificate in public disk
-		'dir' => '/public/fpx/uat',
+		'dir' => '/fpx/uat',
 	],
 	'production' => [
 		'disk' => 'local', // S3 or Local. Don't put your certificate in public disk
-		'dir' => '/public/fpx/prod',
+		'dir' => '/fpx/prod',
 	]
 ],
 ```
 
 You can override the defaults by updating the config file.
 
-3. Run migration to add the banks and fpx_transactions table
+4. Run migration to add the banks and fpx_transactions table
 
 ```bash
 php artisan migrate
+```
+
+5. (Optional) Run this command if you encounter issue with the initial setup
+```bash
+php artisan optimize
 ```
 
 ## Usage
