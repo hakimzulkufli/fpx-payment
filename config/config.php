@@ -1,13 +1,18 @@
 <?php
 
 /*
-	 * You can place your custom package configuration in here.
-	 */
+* You can place your custom package configuration in here.
+*/
 return [
 	/**
 	 * Test Mode
 	 */
 	'test_mode' => env('FPX_TEST_MODE', false),
+
+	/**
+	 * Debug log
+	 */
+	'debugging' => env('FPX_DEBUGGING', false),
 
 	/**
 	 * The Merchant Exchange ID
@@ -113,12 +118,12 @@ return [
 	 */
 	'certificates' => [
 		'uat' => [
-			'disk' => 'local', // S3 or Local. Don't put your certificate in public disk
-			'dir' => '/fpx/uat',
+			'disk' => env('FPX_DISK_UAT', 'local'), // S3 or Local. Don't put your certificate in public disk
+			'dir' => env('FPX_CERT_DIR_UAT', '/fpx/uat'),
 		],
 		'production' => [
-			'disk' => 'local', // S3 or Local. Don't put your certificate in public disk
-			'dir' => '/fpx/prod',
+			'disk' => env('FPX_DISK_PROD', 'local'), // S3 or Local. Don't put your certificate in public disk
+			'dir' => env('FPX_CERT_DIR_PROD', '/fpx/prod'),
 		]
 	],
 

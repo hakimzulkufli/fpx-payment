@@ -6,6 +6,7 @@ use JagdishJP\FpxPayment\Exceptions\InvalidCertificateException;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 trait VerifyCertificate {
@@ -86,13 +87,19 @@ trait VerifyCertificate {
 	 * @return array
 	 */
 	public function getCertLocation(): array {
-		$disk = Config::get('fpx.certificates.uat.disk');
-		$dir = Config::get('fpx.certificates.uat.dir');
-
-
-		if ((Config::get('fpx.test_mode') === false)) {
+		if (Config::get('fpx.test_mode') === false) {
 			$disk = Config::get('fpx.certificates.production.disk');
 			$dir = Config::get('fpx.certificates.production.dir');
+		} else {
+			$disk = Config::get('fpx.certificates.uat.disk');
+			$dir = Config::get('fpx.certificates.uat.dir');
+		}
+
+		if (Config::get('fpx.debugging') === true) {
+			Log::debug('FPX: Certificate Location', [
+				'disk' => $disk,
+				'dir' => $dir,
+			]);
 		}
 
 		return [$disk, $dir];
